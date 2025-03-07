@@ -1,26 +1,10 @@
-"use client";
+import Link from "next/link";
 
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-
-function Box() {
+const Page = async () => {
   return (
-    <mesh>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="orange" />
-    </mesh>
-  );
-}
-
-const Page = () => {
-  return (
-    <div className="w-full h-full">
-      <Canvas>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        <Box />
-        <OrbitControls />
-      </Canvas>
+    <div className="flex flex-col gap-4">
+      <Link href={`3d/base`}>base</Link>
+      <Link href={`3d/skull`}>skull</Link>
     </div>
   );
 };
