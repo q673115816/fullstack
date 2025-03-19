@@ -1,37 +1,10 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  Grid,
-  TransformControls,
-  Text,
-} from "@react-three/drei";
-import { useState } from "react";
-import type { BufferGeometry, NormalBufferAttributes } from "three";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { OrbitControls, Grid, TransformControls } from "@react-three/drei";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
-import { useMount } from "react-use";
 
 const Page = () => {
-  const [geometry, setGeometry] =
-    useState<BufferGeometry<NormalBufferAttributes>>();
-
-  useMount(() => {
-    console.log("useMount");
-    const loader = new STLLoader();
-    loader.load(
-      "/assets/tyrannosaurus_Rex_skull.stl",
-      (geometry) => {
-        console.log(geometry);
-        setGeometry(geometry);
-      },
-      (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-      (error) => {
-        console.error("An error occurred:", error);
-      }
-    );
-  });
+  const geometry = useLoader(STLLoader, "/assets/tyrannosaurus_Rex_skull.stl");
   return (
     <div className="w-full h-full">
       <Canvas>
@@ -41,7 +14,7 @@ const Page = () => {
           <planeGeometry args={[10, 10]} />
           <meshStandardMaterial color="#aaccee" />
         </mesh>
-        <Grid scale={10}/>
+        <Grid scale={10} />
         <TransformControls mode="translate">
           <mesh
             geometry={geometry}
@@ -68,7 +41,7 @@ const Page = () => {
         >
           恐龙
         </Text> */}
-        
+
         <mesh position={[2, 0, 0]}>
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial color="#f5f5dc" />
